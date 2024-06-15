@@ -1,37 +1,47 @@
 import "./App.css";
-import TextArea from "./components/TextArea.tsx";
-import { useState } from "react";
-import Settings from "./components/Settings.tsx";
-import TrainingField from "./components/TrainingField.tsx";
+import { useAppContext } from "./utils/context.tsx";
+//Material UI
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Divider from "@mui/material/Divider";
+import { Typography } from "@mui/material";
+// Custom Components
+import EditArea from "./components/EditArea.tsx";
+import SettingsControls from "./components/SettingsControls.tsx";
+import PracticeArea from "./components/PracticeArea.tsx";
 
 function App() {
-  const [editMode, setEditMode] = useState(true);
-  const [showOnlyFirst, setShowOnlyFirst] = useState(true);
-  const [showLengthClue, setShowLengthClue] = useState(true);
-  const [content, setContent] = useState("");
+  const { editMode } = useAppContext();
 
   return (
     <>
-      <h1>Text to Brain</h1>
-      <main className="card">
-        <Settings
-          editMode={editMode}
-          setEditMode={setEditMode}
-          showOnlyFirst={showOnlyFirst}
-          setShowOnlyFirst={setShowOnlyFirst}
-          showLengthClue={showLengthClue}
-          setShowLengthClue={setShowLengthClue}
-        />
-        {editMode ? (
-          <TextArea
-            className="card__input"
-            content={content}
-            setContent={setContent}
-          />
-        ) : (
-          <TrainingField className="card__output" content={content} />
-        )}
-      </main>
+      <Typography variant="h1" component="div">
+        Text to Brain
+      </Typography>
+      <Card
+        sx={{
+          p: "1rem",
+        }}
+      >
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <SettingsControls />
+        </CardActions>
+        <Divider />
+
+        <CardContent>
+          {editMode ? (
+            <EditArea className="card__input" />
+          ) : (
+            <PracticeArea className="card__output" />
+          )}
+        </CardContent>
+      </Card>
     </>
   );
 }
