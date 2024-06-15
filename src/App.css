@@ -1,20 +1,26 @@
 #root {
-  max-width: 1280px;
+  max-width: 900px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   color: black;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f6f7f9;
+  border-radius: 8px;
 }
+
+
 
 .card {
   display: flex;
   flex-direction: column;
   gap: 1em;
   padding: 2em;
-  background-color: lightgray;
-  border-radius: 5px;
-  min-width: 600px;
+
+
+  border: 1px solid #ccc;
+  width: 100%;
   transition: height 0.3s ease; /* Add this line */
 }
 .card__settings {
@@ -38,14 +44,14 @@
   box-sizing: border-box;
   padding: 20px;
   border-radius: 5px;
-  max-width: 100%;
-  min-width: 100%;
+  width: 100%;
   min-height: fit-content;
   overflow: hidden;
   resize: none;
 }
 .card__output {
-  border: 1px solid #ccc;
+  font-family: monospace;
+  border: 1px solid white;
   box-sizing: border-box;
   padding: 20px;
   border-radius: 5px;
@@ -54,23 +60,31 @@
   min-height: fit-content;
   overflow: hidden;
   resize: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.card__output > p {
+  margin: 0;
+  display: flex ;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 
 .word {
   color: black;
-  padding: 0 5px;
-  background-color: lightgray;
 }
 .word:hover {
   position: relative;
   color: transparent;
-  background-color: gray;
+  background-color: yellow;
 }
 .word:hover::after {
-  padding: 0 5px;
   content: attr(data-value);
+  align-self: center;
   cursor: pointer;
-  color: white;
+  color: black;
   position: absolute;
   left: 0;
 }
