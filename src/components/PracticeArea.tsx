@@ -1,30 +1,25 @@
 import React from "react";
 import Word from "./Word";
 import { useAppContext } from "../utils/context";
-import { formatText } from "../utils/textFormat";
+import { maskText } from "../utils/textFormat";
 
-export default function PracticeArea({ className }) {
+export default function PracticeArea({
+  className,
+}: React.HTMLAttributes<HTMLSpanElement>): React.ReactNode {
   const { textContent, showWordLength, difficulty } = useAppContext();
 
-  const showText = difficulty == 0;
-
-  const formattedParagraphes = formatText(
-    textContent,
-    showText,
-    showWordLength
-  );
-  console.log(formattedParagraphes);
+  const maskedText = maskText(textContent, difficulty, showWordLength);
 
   return (
     <span className={className}>
-      {formattedParagraphes?.map((paraghraph, i) => (
+      {maskedText.map((paragraph, i) => (
         <p key={i}>
-          {paraghraph.map((word, j) => (
-            <Word
-              key={j}
-              rawValue={word.raw}
-              displayValue={difficulty == 0 ? word.raw : word.formatted}
-            />
+          {paragraph.map((sentence, j) => (
+            <span key={j}>
+              {sentence.map((word, k) => (
+                <Word key={k} rawValue={word.raw} displayValue={word.masked} />
+              ))}
+            </span>
           ))}
         </p>
       ))}
