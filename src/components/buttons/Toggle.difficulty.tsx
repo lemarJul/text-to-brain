@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppContext } from "../../utils/context";
 // Material UI
 import ToggleButton from "@mui/material/ToggleButton";
@@ -52,7 +51,7 @@ export default function DifficultyToggleButtons() {
     <ToggleButtonGroup
       value={difficulty}
       exclusive
-      onChange={(event, newDifficulty) =>
+      onChange={(_event, newDifficulty) =>
         newDifficulty !== null && setDifficulty(newDifficulty)
       }
       aria-label="text alignment"
