@@ -6,6 +6,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import LooksThreeIcon from "@mui/icons-material/Looks3";
+//usetheme
 
 export default function DifficultyToggleButtons() {
   const { setDifficulty, difficulty } = useAppContext();
@@ -33,20 +34,6 @@ export default function DifficultyToggleButtons() {
     },
   ];
 
-  const style = {
-    "> button": {
-      "&:focus": {
-        outline: "none",
-      },
-      "&:hover": {
-        borderColor: "transparent",
-      },
-      "&.Mui-selected": {
-        borderColor: "transparent",
-        // backgroundColor: "lightblue !important", // Change this to the color you want
-      },
-    },
-  };
   return (
     <ToggleButtonGroup
       value={difficulty}
@@ -55,7 +42,6 @@ export default function DifficultyToggleButtons() {
         newDifficulty !== null && setDifficulty(newDifficulty)
       }
       aria-label="text alignment"
-      sx={style}
     >
       {buttons.map((button) => (
         <ToggleButton

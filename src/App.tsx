@@ -1,47 +1,61 @@
 import "./App.css";
 import { useAppContext } from "./utils/context.tsx";
 //Material UI
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
-import { Typography } from "@mui/material";
+
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  Divider,
+} from "@mui/material";
 // Custom Components
 import EditArea from "./components/EditArea.tsx";
 import SettingsControls from "./components/SettingsControls.tsx";
 import PracticeArea from "./components/PracticeArea.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
   const { editMode } = useAppContext();
 
   return (
     <>
-      <Typography variant="h1" component="div">
-        Text to Brain
-      </Typography>
-      <Card
+      <Container
         sx={{
-          p: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4rem",
         }}
       >
-        <CardActions
+        <Typography variant="h1" component="div" >
+          Text to Brain
+        </Typography>
+        <Card
           sx={{
-            display: "flex",
-            justifyContent: "flex-end",
+            p: "1rem",
           }}
         >
-          <SettingsControls />
-        </CardActions>
-        <Divider />
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <SettingsControls />
+          </CardActions>
+          <Divider />
 
-        <CardContent>
-          {editMode ? (
-            <EditArea className="card__input" />
-          ) : (
-            <PracticeArea className="card__output" />
-          )}
-        </CardContent>
-      </Card>
+          <CardContent>
+            {editMode ? (
+              <EditArea className="card__input" />
+            ) : (
+              <PracticeArea className="card__output" />
+            )}
+          </CardContent>
+        </Card>
+        <Footer />
+      </Container>
     </>
   );
 }

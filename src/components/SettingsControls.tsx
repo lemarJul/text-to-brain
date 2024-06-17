@@ -1,16 +1,39 @@
 import ModeToggle from "./buttons/Toggle.mode.tsx";
 import DifficultyToggle from "./buttons/Toggle.difficulty.tsx";
 import ShowWordLengthToggle from "./buttons/Toggle.showWordLength.tsx";
+import { Box } from "@mui/material";
+
+import { useTheme } from "@mui/material/styles";
 
 export default function SettingsControls() {
+  const theme = useTheme();
   return (
     <>
-      <span className="card__settings"
+      <Box
+        className="card__settings"
+        sx={{
+          " button": {
+            "&:focus": {
+              outline: "none",
+            },
+            "&:hover": {
+              borderColor: theme.palette.primary.dark,
+            },
+            "&[aria-pressed='true']": {
+              backgroundColor: theme.palette.primary.main,
+              borderColor: theme.palette.primary.main,
+            },
+            "&.css-ueukts-MuiButtonBase-root-MuiToggleButton-root.Mui-selected:hover":
+              {
+                backgroundColor: theme.palette.primary.main,
+              },
+          },
+        }}
       >
-        <ModeToggle   />
+        <ModeToggle />
         <DifficultyToggle />
         <ShowWordLengthToggle />
-      </span>
+      </Box>
     </>
   );
 }
