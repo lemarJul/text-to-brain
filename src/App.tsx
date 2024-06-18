@@ -1,62 +1,27 @@
-import "./App.css";
-import { useAppContext } from "./utils/context.tsx";
-//Material UI
-
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  CardActions,
-  Divider,
-} from "@mui/material";
+//Material UI Components
+import { Container } from "@mui/material";
 // Custom Components
-import EditArea from "./components/EditArea.tsx";
-import SettingsControls from "./components/SettingsControls.tsx";
-import PracticeArea from "./components/PracticeArea.tsx";
-import Footer from "./components/Footer.tsx";
+import Header from "./components/Header";
+import Card from "./components/Card.textToBrain";
+import Footer from "./components/Footer";
+// Styles
+import "./App.css";
 
 function App() {
-  const { editMode } = useAppContext();
-
   return (
-    <>
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "4rem",
-        }}
-      >
-        <Typography variant="h1" component="div" >
-          Text to Brain
-        </Typography>
-        <Card
-          sx={{
-            p: "1rem",
-          }}
-        >
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <SettingsControls />
-          </CardActions>
-          <Divider />
-
-          <CardContent>
-            {editMode ? (
-              <EditArea className="card__input" />
-            ) : (
-              <PracticeArea className="card__output" />
-            )}
-          </CardContent>
-        </Card>
-        <Footer />
-      </Container>
-    </>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "4rem",
+      }}
+    >
+      <Header />
+      <main>
+        <Card />
+      </main>
+      <Footer />
+    </Container>
   );
 }
 
