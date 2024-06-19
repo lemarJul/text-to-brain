@@ -15,6 +15,16 @@ const theme = createTheme({
       main: colors.red.A400,
     },
   },
+  components: {
+    // Use this key to inject global styles
+    MuiCssBaseline: {
+      styleOverrides: `
+        button:focus {
+          outline: none;
+        }
+      `,
+    },
+  },
 });
 
 export default theme;
