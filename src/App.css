@@ -72,19 +72,8 @@
   gap: 0.5em;
 }
 
-.word {
-  color: black;
-}
-.word:hover {
-  position: relative;
-  color: transparent;
-  background-color: yellow;
-}
-.word:hover::after {
-  content: attr(data-value);
-  align-self: center;
-  cursor: pointer;
-  color: black;
-  position: absolute;
-  left: 0;
+
+
+ body {
+  overflow-y: scroll;
 }
