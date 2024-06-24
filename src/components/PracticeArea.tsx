@@ -1,7 +1,7 @@
 import React from "react";
 import Word from "./Word";
 import { useAppContext } from "../utils/context";
-import { maskText } from "../utils/textFormat";
+import { maskText } from "../utils/maskText";
 
 export default function PracticeArea({
   className,
