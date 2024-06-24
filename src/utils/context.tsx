@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useMemo } from "react";
 
-type AppContextType = {
+export type AppContextType = {
   difficulty: 0 | 1 | 2 | 3;
   setDifficulty: React.Dispatch<React.SetStateAction<0 | 1 | 2 | 3>>;
   editMode: boolean;
