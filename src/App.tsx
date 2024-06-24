@@ -1,15 +1,36 @@
-//Material UI Components
+// Styles - Fonts
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+// Styles - Theme
+import theme from "./theme";
+// Styles - Components
+import { ThemeProvider } from "@emotion/react";
+import CssBaseline from "@mui/material/CssBaseline";
+// Stylesheet
+import "./App.css";
+// Context
+import { AppContextProvider, useAppContext } from "./utils/context";
+// Components
 import { Container, Collapse } from "@mui/material";
-// Custom Components
 import Header from "./components/Header";
 import Card from "./components/Card.textToBrain";
 import Footer from "./components/Footer";
 import About from "./components/About";
-// Styles
-import "./App.css";
-import { useAppContext } from "./utils/context";
 
-function App() {
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContextProvider>
+        <Main />
+      </AppContextProvider>
+    </ThemeProvider>
+  );
+}
+
+function Main() {
   const { showAbout } = useAppContext();
   const styles = {
     container: {
@@ -38,5 +59,3 @@ function App() {
     </Container>
   );
 }
-
-export default App;
