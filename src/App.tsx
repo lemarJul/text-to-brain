@@ -11,29 +11,26 @@ import { useAppContext } from "./utils/context";
 
 function App() {
   const { showAbout } = useAppContext();
-  return (
-    <Container
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "4rem",
-      }}
-    >
-      <Header />
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "4rem",
+    },
+    collapseAnimation: {
+      timeout: 500,
+      easing: { enter: "easeOut", exit: "easeIn" },
+    },
+  };
 
+  return (
+    <Container sx={styles.container}>
+      <Header />
       <main>
-        <Collapse
-          in={showAbout}
-          timeout={500}
-          easing={{ enter: "easeOut", exit: "easeIn" }}
-        >
+        <Collapse in={showAbout} {...styles.collapseAnimation}>
           <About />
         </Collapse>
-        <Collapse
-          in={!showAbout}
-          timeout={500}
-          easing={{ enter: "easeOut", exit: "easeIn" }}
-        >
+        <Collapse in={!showAbout} {...styles.collapseAnimation}>
           <Card />
         </Collapse>
       </main>
