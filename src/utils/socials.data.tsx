@@ -5,7 +5,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 export default [
   {
     // GitHub
-    href: "https://github.com/lemarJul",
+    href: "https://github.com/lemarJul/text-to-brain",
     icon: <GitHubIcon />,
   },
   {
@@ -15,7 +15,7 @@ export default [
   },
   {
     // Instagram
-    href: "https://www.instagram.com/lemarjul/",
+    href: "https://www.instagram.com/lemar.jul/",
     icon: <InstagramIcon />,
   },
 ];
