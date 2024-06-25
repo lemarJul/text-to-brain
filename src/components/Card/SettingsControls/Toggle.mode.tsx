@@ -10,6 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import LooksThreeIcon from "@mui/icons-material/Looks3";
+import { CARD_MODES } from "../../../utils/context";
 
 // Define a type for the mode options to improve type safety
 type ModeOptions = {
@@ -24,12 +25,24 @@ export default function ModeToggleButtons(
   const { setCardMode: setMode, cardMode: mode } = useAppContext();
 
   const modeOptions: ModeOptions[] = [
-    { value: -1, title: "Hide text", icon: <EditIcon /> },
-    { value: 0, title: "View raw text", icon: <VisibilityIcon /> },
-    { value: 1, title: "Show first word's letter", icon: <LooksOneIcon /> },
-    { value: 2, title: "Show first sentence's letter", icon: <LooksTwoIcon /> },
+    { value: CARD_MODES.EDIT, title: "Hide text", icon: <EditIcon /> },
     {
-      value: 3,
+      value: CARD_MODES.NONE,
+      title: "View raw text",
+      icon: <VisibilityIcon />,
+    },
+    {
+      value: CARD_MODES.WORD,
+      title: "Show first word's letter",
+      icon: <LooksOneIcon />,
+    },
+    {
+      value: CARD_MODES.SENTENCE,
+      title: "Show first sentence's letter",
+      icon: <LooksTwoIcon />,
+    },
+    {
+      value: CARD_MODES.PARAGRAPH,
       title: "Show first paragraph's letter",
       icon: <LooksThreeIcon />,
     },
