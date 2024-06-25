@@ -1,14 +1,17 @@
 import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ToggleButtonGroup, {
+  ToggleButtonGroupProps,
+} from "@mui/material/ToggleButtonGroup";
 import EditIcon from "@mui/icons-material/Edit";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-import { useAppContext } from "../../utils/context";
+import { useAppContext } from "../../../utils/context";
 
-function ModeToggle() {
+function ModeToggle({ sx, ...props }: Readonly<ToggleButtonGroupProps>) {
   const { editMode, setEditMode } = useAppContext();
 
   return (
-    <ToggleButtonGroup 
+    <ToggleButtonGroup
+      {...props}
       exclusive
       value={editMode}
       onChange={(_event, newEditMode) => {
@@ -17,8 +20,9 @@ function ModeToggle() {
           setEditMode(newEditMode);
         }
       }}
+      sx={sx}
     >
-      <ToggleButton value={true} aria-label="Edit mode" title="Edit mode" >
+      <ToggleButton value={true} aria-label="Edit mode" title="Edit mode">
         <EditIcon />
       </ToggleButton>
       <ToggleButton
@@ -29,14 +33,6 @@ function ModeToggle() {
         <RecordVoiceOverIcon />
       </ToggleButton>
     </ToggleButtonGroup>
-
-    // <ToggleChildrenButton
-    //   className={"card__settings__button"}
-    //   title="Toggle mode"
-    //   {...props}
-    //   childrenState1={<EditIcon />}
-    //   childrenState2={<RecordVoiceOverIcon />}
-    // />
   );
 }
 

@@ -1,40 +1,41 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, BoxProps } from "@mui/material";
 import { useAppContext } from "../utils/context";
-import Word from "./Word";
+import Word from "./Card/Word";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import LooksThreeIcon from "@mui/icons-material/Looks3";
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0 4rem",
-    gap: "2rem",
-    "& > *": {
-      textAlign: "justify",
-    },
-  },
-  difficulties: {
-    display: "flex",
-    gap: "3rem",
-    "& > span": {
+export default function About(props: Readonly<BoxProps>) {
+  const { setShowAbout } = useAppContext();
+
+  const styles = {
+    container: {
       display: "flex",
-      gap: "0.5rem",
+      flexDirection: "column",
       alignItems: "center",
-      "& svg": {
-        fontSize: "2rem",
+      justifyContent: "center",
+      padding: "0 4rem",
+      gap: "2rem",
+      "& > *": {
+        textAlign: "justify",
       },
     },
-  },
-};
+    difficulties: {
+      display: "flex",
+      gap: "3rem",
+      "& > span": {
+        display: "flex",
+        gap: "0.5rem",
+        alignItems: "center",
+        "& svg": {
+          fontSize: "2rem",
+        },
+      },
+    },
+  };
 
-export default function About() {
-  const { setShowAbout } = useAppContext();
   return (
-    <Box sx={styles.container}>
+    <Box {...props} sx={styles.container}>
       <Typography variant="h4" component="h2">
         Mémorisez efficacement !
       </Typography>

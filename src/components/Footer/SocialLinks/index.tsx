@@ -1,8 +1,8 @@
-import { Box, useTheme } from "@mui/material";
-import socialData from "../utils/socials.data";
+import { Box, BoxProps, useTheme } from "@mui/material";
+import socialData from "../../../utils/socials.data";
 import Link from "./Link";
 
-export default function SocialLinksContainer() {
+export default function SocialLinksContainer(props: Readonly<BoxProps>) {
   const theme = useTheme();
   const style = {
     display: "flex",
@@ -17,8 +17,9 @@ export default function SocialLinksContainer() {
       },
     },
   };
+
   return (
-    <Box sx={style}>
+    <Box {...props} sx={style}>
       {socialData.map((social, i) => (
         <Link key={i} href={social.href}>
           {social.icon}

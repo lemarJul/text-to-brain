@@ -1,12 +1,10 @@
-import { Link, useTheme } from "@mui/material";
+import { Link, LinkProps, useTheme } from "@mui/material";
 
 export default function BaseLink({
-  href,
   children,
-}: Readonly<{
-  href: string;
-  children: React.ReactNode;
-}>) {
+  href,
+  ...props
+}: Readonly<LinkProps>) {
   const theme = useTheme();
   const style = {
     color: "black",
@@ -18,7 +16,13 @@ export default function BaseLink({
   };
 
   return (
-    <Link href={href} target="_blank" rel="noopener noreferrer" sx={style}>
+    <Link
+      {...props}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={style}
+    >
       {children}
     </Link>
   );

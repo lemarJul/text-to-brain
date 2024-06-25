@@ -1,14 +1,18 @@
-import React from "react";
-import { Box } from "@mui/material"; // Assuming you're using Material-UI for the sx prop
+import { Box, BoxProps } from "@mui/material"; // Assuming you're using Material-UI for the sx prop
 
 //Word is a span
-type WordProps = React.HTMLAttributes<HTMLSpanElement> & {
+type WordProps = BoxProps & {
   rawValue?: string;
   displayValue?: string;
 };
 
-const styles = {
-  word: {
+function Word({
+  className,
+  rawValue,
+  displayValue,
+  ...props
+}: Readonly<WordProps>) {
+  const styles = {
     color: "black",
     "&:hover": {
       position: "relative",
@@ -23,12 +27,10 @@ const styles = {
         left: 0,
       },
     },
-  },
-};
+  };
 
-function Word({ className, rawValue, displayValue, ...rest }: WordProps) {
   return (
-    <Box component="span" data-value={rawValue} sx={styles.word} {...rest}>
+    <Box {...props} component="span" data-value={rawValue} sx={styles}>
       {displayValue}
     </Box>
   );

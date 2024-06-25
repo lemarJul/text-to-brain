@@ -1,21 +1,21 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, BoxProps } from "@mui/material";
 import InfoButton from "./buttons/Button.info";
 import { useAppContext } from "../utils/context";
 
-export default function Header() {
+export default function Header(props: Readonly<BoxProps>) {
   const { setShowAbout } = useAppContext();
   const ToggleAbout = () => setShowAbout((prev) => !prev);
+
+  const style = {
+    position: "relative",
+    button: {
+      position: "absolute",
+      top: "1rem",
+    },
+  };
+
   return (
-    <Box
-      component="header"
-      sx={{
-        position: "relative",
-        button: {
-          position: "absolute",
-          top: "1rem",
-        },
-      }}
-    >
+    <Box {...props} component="header" sx={style}>
       <Typography variant="h1" component="h1" display={"inline"}>
         Text to Brain
       </Typography>

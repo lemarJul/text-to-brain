@@ -2,7 +2,9 @@ import React, { createContext, useState, useContext, useMemo } from "react";
 
 export type AppContextType = {
   difficulty: 0 | 1 | 2 | 3;
-  setDifficulty: React.Dispatch<React.SetStateAction<0 | 1 | 2 | 3>>;
+  setDifficulty: React.Dispatch<
+    React.SetStateAction<AppContextType["difficulty"]>
+  >;
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   showWordLength: boolean;
@@ -14,7 +16,7 @@ export type AppContextType = {
   // Add other state variables here
 };
 
-const AppContext = createContext<AppContextType | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined); // Create a context with the initial value of undefined
 
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -35,7 +37,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
           difficulty,
           setDifficulty,
           editMode,
-          setEditMode /* Add other state variables here */,
+          setEditMode,
           showWordLength,
           setShowWordLength,
           textContent,
@@ -62,6 +64,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
       setTextContent,
       showAbout,
       setShowAbout,
+      // Add other state variables here
     ]
   );
 };

@@ -10,65 +10,6 @@
   border-radius: 8px;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding: 2em;
-  border: 1px solid #ccc;
-  width: 100%;
-  transition: height 0.3s ease; /* Add this line */
-}
-
-.card__settings {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1em;
-}
-
-.card__settings__button {
-  outline: none !important;
-}
-.card__settings__button:hover {
-  border-color: lightseagreen;
-}
-.card__settings__button.inactive {
-  background-color: #f0f0f0;
-  color: #ccc;
-}
-.card__input {
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  padding: 20px;
-  border-radius: 5px;
-  width: 100%;
-  min-height: fit-content;
-  overflow: hidden;
-  resize: none;
-}
-.card__output {
-  font-family: monospace;
-  border: 1px solid white;
-  box-sizing: border-box;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 100%;
-  min-width: 100%;
-  min-height: fit-content;
-  overflow: hidden;
-  resize: none;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-.card__output > p {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-}
-
 body {
   overflow-y: scroll;
 }

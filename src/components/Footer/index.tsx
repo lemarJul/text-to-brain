@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
-import SocialLinks from "./Links.socials";
+import { Box, BoxProps } from "@mui/material";
+import SocialLinks from "./SocialLinks";
 import CopyrightNotice from "./CopyrightNotice";
 
-export default function Footer() {
+export default function Footer(props: Readonly<BoxProps>) {
   const style = {
     display: "flex",
     flexDirection: "column",
@@ -10,7 +10,7 @@ export default function Footer() {
   };
 
   return (
-    <Box component="footer" sx={style}>
+    <Box {...props} component="footer" sx={style}>
       <SocialLinks />
       <CopyrightNotice />
     </Box>
