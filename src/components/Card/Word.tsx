@@ -13,6 +13,7 @@ function Word({
   ...props
 }: Readonly<WordProps>) {
   const styles = {
+
     color: "black",
     "&:hover": {
       position: "relative",
@@ -21,7 +22,6 @@ function Word({
       "&::after": {
         content: "attr(data-value)",
         alignSelf: "center",
-        cursor: "pointer",
         color: "black",
         position: "absolute",
         left: 0,
