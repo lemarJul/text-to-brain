@@ -2,7 +2,7 @@ import { IconButton, IconButtonProps } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useTheme } from "@mui/material";
 
-export default function InfoButton(props?: IconButtonProps) {
+export default function InfoButton(props: Readonly<IconButtonProps>) {
   const theme = useTheme();
 
   const style = {
