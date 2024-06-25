@@ -3,12 +3,15 @@ import { useAppContext } from "../../utils/context";
 import { maskText } from "../../utils/maskText";
 import { Box, BoxProps } from "@mui/system";
 
+
+
+
 export default function PracticeArea({
   className,
   ...props
 }: Readonly<BoxProps>) {
-  const { textContent, showWordLength, difficulty } = useAppContext();
-  const maskedText = maskText(textContent, difficulty, showWordLength);
+  const { textContent, showWordLength, cardMode: mode } = useAppContext();
+  const maskedText = maskText(textContent, mode, showWordLength);
 
   const style = {
     fontFamily: "monospace",
@@ -24,7 +27,6 @@ export default function PracticeArea({
     textAlign: "left",
     display: "flex",
     flexDirection: "column",
-    gap: "1em",
   };
 
   return (

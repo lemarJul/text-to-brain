@@ -1,27 +1,20 @@
-export const MASK_LEVEL = {
-  NONE: 0,
-  WORD: 1,
-  SENTENCE: 2,
-  PARAGRAPH: 3,
-} as const;
-type MaskLevel = (typeof MASK_LEVEL)[keyof typeof MASK_LEVEL];
+import { CARD_MODES, CardModeType } from "./context";
 
-const MASK_MODE = {
+const LETTER_MASKS = {
   EXCEPT_FIRST: -1,
   ALL: 0,
   NONE: 1,
 } as const;
-type MaskMode = (typeof MASK_MODE)[keyof typeof MASK_MODE];
+type LetterMaskType = (typeof LETTER_MASKS)[keyof typeof LETTER_MASKS];
 
 export function maskText(
   txt: string,
-  maskLevel: MaskLevel,
+  mode: CardModeType,
   ShowWordLength = true
 ) {
   const rx_paragraph = /[\n]/g;
   const rx_sentence = /(?<=[\.\?\:\;\!])/g; // split by dot character but keep it in the result
   const rx_word = /(?<=\ )/g; // split by space character but keep it in the result
-  const maskChar = ShowWordLength ? "_" : "";
 
   return txt.split(rx_paragraph).map((paragraph) =>
     paragraph.split(rx_sentence).map((sentence, sentenceIndex) =>
@@ -31,34 +24,36 @@ export function maskText(
         .map((word, wordIndex) => {
           const isFirstParagraphWord = wordIndex == 0 && sentenceIndex === 0;
           const isFirstSentenceWord = wordIndex === 0;
+          const maskChar = ShowWordLength ? "_" : "";
 
           const maskStrategies = new Map([
-            [MASK_LEVEL.NONE, () => word],
+            [CARD_MODES.EDIT, () => word],
+            [CARD_MODES.NONE, () => word],
             [
-              MASK_LEVEL.WORD,
-              () => applyMask(word, MASK_MODE.EXCEPT_FIRST, maskChar),
+              CARD_MODES.WORD,
+              () => applyMask(word, LETTER_MASKS.EXCEPT_FIRST, maskChar),
             ],
             [
-              MASK_LEVEL.SENTENCE,
+              CARD_MODES.SENTENCE,
               () =>
                 applyMask(
                   word,
-                  isFirstSentenceWord ? MASK_MODE.EXCEPT_FIRST : MASK_MODE.ALL,
+                  isFirstSentenceWord ? LETTER_MASKS.EXCEPT_FIRST : LETTER_MASKS.ALL,
                   maskChar
                 ),
             ],
             [
-              MASK_LEVEL.PARAGRAPH,
+              CARD_MODES.PARAGRAPH,
               () =>
                 applyMask(
                   word,
-                  isFirstParagraphWord ? MASK_MODE.EXCEPT_FIRST : MASK_MODE.ALL,
+                  isFirstParagraphWord ? LETTER_MASKS.EXCEPT_FIRST : LETTER_MASKS.ALL,
                   maskChar
                 ),
             ],
           ]);
 
-          const maskStrategy = maskStrategies.get(maskLevel);
+          const maskStrategy = maskStrategies.get(mode);
           return {
             raw: word,
             masked: maskStrategy ? maskStrategy() : word,
@@ -68,16 +63,16 @@ export function maskText(
   );
 }
 
-function applyMask(txt: string, maskMode: MaskMode, maskChar = "_") {
+function applyMask(txt: string, maskMode: LetterMaskType, maskChar = "_") {
   const alphaNum = /[A-Za-zÀ-Üà-ü0-9]/g;
   const firstAndRest = new RegExp(
     `(${alphaNum.source})(${alphaNum.source}*)`,
     "gm"
   );
   return txt.replace(firstAndRest, (_match, _first, _rest) => {
-    const first = maskMode === MASK_MODE.ALL ? maskChar : _first;
+    const first = maskMode === LETTER_MASKS.ALL ? maskChar : _first;
     const rest =
-      maskMode === MASK_MODE.NONE ? _rest : _rest.replace(alphaNum, maskChar);
+      maskMode === LETTER_MASKS.NONE ? _rest : _rest.replace(alphaNum, maskChar);
     return first + rest;
   });
 }

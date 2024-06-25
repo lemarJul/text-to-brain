@@ -9,9 +9,10 @@ import EditArea from "./EditArea";
 import PracticeArea from "./PracticeArea";
 import SettingsControls from "./SettingsControls";
 import { useAppContext } from "../../utils/context";
+import { CARD_MODES } from "../../utils/context";
 
 export default function TtbCard(props: Readonly<CardProps>) {
-  const { editMode } = useAppContext();
+  const { cardMode } = useAppContext();
   const styles = {
     card: {
       display: "flex",
@@ -35,7 +36,9 @@ export default function TtbCard(props: Readonly<CardProps>) {
       </CardActions>
       <Divider />
 
-      <CardContent>{editMode ? <EditArea /> : <PracticeArea />}</CardContent>
+      <CardContent>
+        {cardMode === CARD_MODES.EDIT ? <EditArea /> : <PracticeArea />}
+      </CardContent>
     </Card>
   );
 }

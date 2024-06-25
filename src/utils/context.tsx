@@ -1,12 +1,17 @@
 import React, { createContext, useState, useContext, useMemo } from "react";
 
+export const CARD_MODES = {
+  EDIT: -1,
+  NONE: 0,
+  WORD: 1,
+  SENTENCE: 2,
+  PARAGRAPH: 3,
+} as const;
+export type CardModeType = (typeof CARD_MODES)[keyof typeof CARD_MODES];
+
 export type AppContextType = {
-  difficulty: 0 | 1 | 2 | 3;
-  setDifficulty: React.Dispatch<
-    React.SetStateAction<AppContextType["difficulty"]>
-  >;
-  editMode: boolean;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  cardMode: CardModeType;
+  setCardMode: React.Dispatch<React.SetStateAction<CardModeType>>;
   showWordLength: boolean;
   setShowWordLength: React.Dispatch<React.SetStateAction<boolean>>;
   textContent: string;
@@ -21,8 +26,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined); // Crea
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [difficulty, setDifficulty] = useState<0 | 1 | 2 | 3>(0);
-  const [editMode, setEditMode] = useState(true);
+  const [cardMode, setCardMode] = useState<CardModeType>(CARD_MODES.EDIT);
   const [showWordLength, setShowWordLength] = useState(true);
   const [textContent, setTextContent] = useState(
     localStorage.getItem("textContent") || ""
@@ -34,10 +38,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
     () => (
       <AppContext.Provider
         value={{
-          difficulty,
-          setDifficulty,
-          editMode,
-          setEditMode,
+          cardMode,
+          setCardMode,
           showWordLength,
           setShowWordLength,
           textContent,
@@ -54,10 +56,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
       </AppContext.Provider>
     ),
     [
-      difficulty,
-      setDifficulty,
-      editMode,
-      setEditMode,
+      cardMode,
+      setCardMode,
       showWordLength,
       setShowWordLength,
       textContent,
